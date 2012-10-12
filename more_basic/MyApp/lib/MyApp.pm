@@ -44,6 +44,14 @@ __PACKAGE__->config(
     enable_catalyst_header => 1, # Send X-Catalyst header
 );
 
+__PACKAGE__->config(
+    'View::HTML' => {
+        INCLUDE_PATH => [
+            __PACKAGE__->path_to( 'root', 'src' ),
+        ],
+    },
+);
+
 # Start the application
 __PACKAGE__->setup(qw/-Debug ConfigLoader Static:;Simple/);
 
