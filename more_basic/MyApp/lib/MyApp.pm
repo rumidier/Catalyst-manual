@@ -53,7 +53,7 @@ __PACKAGE__->config(
 );
 
 # Start the application
-__PACKAGE__->setup(qw/-Debug ConfigLoader Static:;Simple/);
+__PACKAGE__->setup(qw/-Debug ConfigLoader Static::Simple/);
 
 
 =head1 NAME
