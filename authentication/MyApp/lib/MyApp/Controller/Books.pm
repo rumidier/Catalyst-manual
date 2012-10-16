@@ -30,7 +30,7 @@ sub index :Path :Args(0) {
 =head2 list
 =cut
 
-sub list :Local {
+sub list :Chained('base') :PathParth('list') :Args(0) {
     my ($self, $c) = @_;
 
     $c->stash(books => [$c->model('DB::Book')->all]);
@@ -51,6 +51,8 @@ sub base :Chained('/') :PathPart('books') :CaptureArgs(0) {
 
     # Print a message to the debug log
     $c->log->debug('*** INSIDE BASE METHOD ***');
+
+    $c->load_status_msgs;
 }
 
 =head2 url_create
@@ -161,6 +163,7 @@ Delete a book
 sub delete :Chained('object') :PathPart('delete') :Args(0) {
     my ($self, $c) = @_;
 
+    my $id = $c->stash->{object}->id;
     # Use the book object saved by 'object' and delete it along
     # with related 'book_author' entries
     $c->stash->{object}->delete;
@@ -172,8 +175,9 @@ sub delete :Chained('object') :PathPart('delete') :Args(0) {
     # $c->forward('list');
     #$c->response->redirect($c->uri_for($self->action_for('list')));
 
+    $c->flash->{status_msg} = "Book deleted";
     $c->response->redirect($c->uri_for($self->action_for('list'),
-        {status_msg => "Book deleted."}));
+        {mid => $c->set_status_msg("Deleted book $id")}));
 }
 
 =head2 list_recent
