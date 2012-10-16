@@ -1,12 +1,12 @@
 use utf8;
-package MyApp::Schema::Result::BookAuthor;
+package MyApp::Schema::Result::UserRole;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-MyApp::Schema::Result::BookAuthor
+MyApp::Schema::Result::UserRole
 
 =cut
 
@@ -32,21 +32,21 @@ extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp");
 
-=head1 TABLE: C<book_author>
+=head1 TABLE: C<user_role>
 
 =cut
 
-__PACKAGE__->table("book_author");
+__PACKAGE__->table("user_role");
 
 =head1 ACCESSORS
 
-=head2 book_id
+=head2 user_id
 
   data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
-=head2 author_id
+=head2 role_id
 
   data_type: 'integer'
   is_foreign_key: 1
@@ -55,9 +55,9 @@ __PACKAGE__->table("book_author");
 =cut
 
 __PACKAGE__->add_columns(
-  "book_id",
+  "user_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
-  "author_id",
+  "role_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
 );
 
@@ -65,51 +65,51 @@ __PACKAGE__->add_columns(
 
 =over 4
 
-=item * L</book_id>
+=item * L</user_id>
 
-=item * L</author_id>
+=item * L</role_id>
 
 =back
 
 =cut
 
-__PACKAGE__->set_primary_key("book_id", "author_id");
+__PACKAGE__->set_primary_key("user_id", "role_id");
 
 =head1 RELATIONS
 
-=head2 author
+=head2 role
 
 Type: belongs_to
 
-Related object: L<MyApp::Schema::Result::Author>
+Related object: L<MyApp::Schema::Result::Role>
 
 =cut
 
 __PACKAGE__->belongs_to(
-  "author",
-  "MyApp::Schema::Result::Author",
-  { id => "author_id" },
+  "role",
+  "MyApp::Schema::Result::Role",
+  { id => "role_id" },
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
-=head2 book
+=head2 user
 
 Type: belongs_to
 
-Related object: L<MyApp::Schema::Result::Book>
+Related object: L<MyApp::Schema::Result::User>
 
 =cut
 
 __PACKAGE__->belongs_to(
-  "book",
-  "MyApp::Schema::Result::Book",
-  { id => "book_id" },
+  "user",
+  "MyApp::Schema::Result::User",
+  { id => "user_id" },
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
 
 # Created by DBIx::Class::Schema::Loader v0.07025 @ 2012-10-16 14:59:05
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kos06WX6hQKlMSL3qMbHnw
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FTZx51dkAywP5qUjh/FgoA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -30,15 +30,6 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-#
-# Row-level helper methods
-#
-sub full_name {
-  my ($self) = @_;
-
-  return $self->first_name . ' ' . $self->last_name;
-}
-
 __PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp");
 
 =head1 TABLE: C<author>
@@ -116,8 +107,8 @@ Composing rels: L</book_authors> -> book
 __PACKAGE__->many_to_many("books", "book_authors", "book");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07025 @ 2012-10-15 14:14:51
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6GqkLLRItlp4NgzyXG/0MQ
+# Created by DBIx::Class::Schema::Loader v0.07025 @ 2012-10-16 14:59:05
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:c9KTzNCoHGxc2PsobK5uLg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
