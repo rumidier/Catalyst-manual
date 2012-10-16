@@ -55,6 +55,18 @@ sub index :Path :Args(0) {
     $c->response->body( $c->welcome_message );
 }
 
+=head2 error_noperms
+
+Permissions error screen
+
+=cut
+
+sub error_noperms :Chained('/') :PathPart('error_noperms') :Args(0) {
+    my ($self, $c) = @_;
+
+    $c->stash(template => 'error_noperms.tt2');
+}
+
 =head2 default
 
 Standard 404 error page
