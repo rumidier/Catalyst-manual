@@ -136,12 +136,12 @@ Composing rels: L</user_roles> -> role
 
 __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
-
 # Created by DBIx::Class::Schema::Loader v0.07025 @ 2012-10-16 17:16:12
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oYmSnHWFWxEpRqNZHgIC9w
 
 # Have the 'password' column use a SHA-1 hash and 20-byte salt
 # with RFC 2307 encoding; Generate the 'check_password" method
+
 __PACKAGE__->add_columns(
     'password' => {
         passphrase       => 'rfc2307',
