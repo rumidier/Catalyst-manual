@@ -126,6 +126,49 @@ __PACKAGE__->many_to_many("authors", "book_authors", "author");
 # Created by DBIx::Class::Schema::Loader v0.07025 @ 2012-10-16 17:16:12
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VS8I+TBevhqQ4xNzh89sbQ
 
+#
+# Enable automatic date handling
+#
+__PACKAGE__->add_columns(
+    "created",
+    { data_type => 'timestamp', set_on_create => 1 },
+    "updated",
+    { data_type => 'timestamp', set_on_create => 1, set_on_update => 1 },
+);
+
+
+=head2 author_count
+
+Return the number of authors for the current book
+
+=cut
+
+sub author_count {
+    my ($self) = @_;
+
+    # Use the 'many_to_many' relationship to fetch all of the authors for the current
+    # and the 'count' method in DBIx::Class::ResultSet to get a SQL COUNT
+    return $self->authors->count;
+}
+
+=head2 author_list
+
+Return a comma-separated list of authors for the current book
+
+=cut
+
+sub author_list {
+    my ($self) = @_;
+
+    # Loop through all authors for the current book, calling all the 'full_name'
+    # Result Class method for each
+    my @names;
+    foreach my $author ($self->authors) {
+        push(@names, $author->full_name);
+    }
+
+    return join(', ', @names);
+}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
