@@ -16,6 +16,7 @@ requires 'Catalyst::Action::RenderView';
 requires 'Catalyst::Plugin::StackTrace';
 requires 'Catalyst::Plugin::Authentication';
 requires 'Catalyst::Plugin::Session';
+requires 'Perl6::Junction';
 requires 'Catalyst::Plugin::Authorization::Roles';
 requires 'Catalyst::Plugin::Session::Store::File';
 requires 'Catalyst::Plugin::Session::State::Cookie';
