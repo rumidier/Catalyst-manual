@@ -155,6 +155,8 @@ Delete a book
 sub delete :Chained('object') :PathPart('delete') :Args(0) {
     my ($self, $c) = @_;
 
+    $c->detach('/error_noperms') unless $c->stash->{object}->delete_allowed_by($c->user->get_object);
+
     my $id = $c->stash->{object}->id;
     # Use the book object saved by 'object' and delete it along
     # with related 'book_author' entries

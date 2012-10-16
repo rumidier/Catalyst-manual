@@ -170,6 +170,17 @@ sub author_list {
     return join(', ', @names);
 }
 
+=head2 delete_allowed_by
+
+Can the specified user delete the current book?
+
+=cut
+
+sub delete_allowed_by {
+    my ( $self, $user ) = @_;
+
+    return $user->has_role('admin');
+}
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
 1;
